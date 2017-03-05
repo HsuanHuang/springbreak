@@ -39,36 +39,72 @@ svg.append("circle")
 
 var flightData;
 
+
+
+var degree;
+
+// Converts from degrees to radians.
+Math.radians = function(degrees) {
+  return degrees * Math.PI / 180;
+};
+
+// Converts from radians to degrees.
+Math.degrees = function(radians) {
+  return radians * 180 / Math.PI;
+};
+
+var centerLat = Math.radians(39.8282);
+var centerLong = Math.radians(-98.5795);
+
+
+
 d3.csv("flightData.csv", function (error, data) {
-	
+
 		flightData = data;
+		//console.log(flightData);
 
-		flightData.forEach(function (d) {
-			
-			
-		});
 		
-		return ;
-	});
-	
-	var priceExtent = d3.extent(countryData,function (d) { 
-		return d.Population; 
-	});
 
-	console.log(priceExtent);
+		var priceScale = d3.scaleLinear()
+						.domain([117, 1104])
+						.range([50, 400]);
 
-	var priceScale = d3.scaleLinear().domain(priceExtent).range([20, 400]);
+		flightData.forEach(function(d) {
 
-	
-	flightData.forEach(function (d) {
-		svg.append("circle")
-		.attr("cx", )
-		.attr("cy", )
-		.attr("r", priceScale( ))
-		.style("opacity", 0.3);
-		//.style("fill", )
-	});
+
+			var lon = Math.radians( d.Long );
+			
+			var lat = Math.radians( d.Lat );
+
+			var y = Math.sin(lon - centerLong)* Math.cos(lat);
+			var x = Math.cos( centerLat )* Math.sin(lat) - Math.sin(centerLat)* Math.cos(lat)* Math.cos(lon - centerLong);
+			var bearing =  Math.atan2(y, x) ;
+
+			console.log(bearing + d.City);
+
+			var r = priceScale(d.Price);
+			//console.log(r);
+
+			var cx = 400 + r * Math.sin(bearing);
+			var cy = 400 + r * Math.cos(bearing)*(-1);
+
+			svg.append("circle")
+			.attr("cx", cx)
+			.attr("cy", cy)
+			.attr("r", 5)
+			.style("fill", "gray")
+
+			svg.append("text")
+			.text(d.City)
+			.attr("x", cx)
+			.attr("y", cy)
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "10px")
+            .attr("fill", "red");
+
+		 });
 });
+	
 
 
 
