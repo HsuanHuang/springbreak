@@ -36,29 +36,10 @@ svg.append("circle")
 .style("fill", "#FFC200");
 
 
-//Variable of each city
-
-//city name
-var city;
-
-//round trip price 
-var price;
-
-//flying hours
-var hours;
-
-//airline
-var airline;
-
-//longitude 
-var lon;
-
-//latitude
-var lat; 
 
 var flightData;
 
-d3.csv("#.csv", function (error, data) {
+d3.csv("flightData.csv", function (error, data) {
 	
 		flightData = data;
 
