@@ -69,6 +69,10 @@ d3.csv("flightData.csv", function (error, data) {
 						.domain([117, 1104])
 						.range([50, 400]);
 
+		var hourScale = d3.scaleLinear()
+						.domain([0, 40])
+						.range([0,1]);
+
 		flightData.forEach(function(d) {
 
 
@@ -92,15 +96,15 @@ d3.csv("flightData.csv", function (error, data) {
 			.attr("cx", cx)
 			.attr("cy", cy)
 			.attr("r", 5)
-			.style("fill", "gray")
+			.style("opacity", hourScale(d.FlightHour))
 
 			svg.append("text")
 			.text(d.City)
-			.attr("x", cx)
-			.attr("y", cy)
-            .attr("font-family", "sans-serif")
+			.attr("x", cx+5)
+			.attr("y", cy+5)
+            .attr("font-family", "Futura")
             .attr("font-size", "10px")
-            .attr("fill", "red");
+            .attr("fill", "gray");
 
 		 });
 });
