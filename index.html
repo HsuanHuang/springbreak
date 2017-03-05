@@ -7,22 +7,87 @@
 <script src="http://d3js.org/topojson.v2.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
 <style>
-body { font-family: 'Alegreya Sans', Calibri, sans-serif; }
+body { font-family: 'Futura', Calibri, sans-serif; }
 svg { border: solid #ccc 1px; }
-path.country { fill: #ccc; stroke: #888;; }
 </style>
 </head>
 <body>
-<h3>Your Spring Break Destination - Flight Price And Hours Information From JFK </h3>
+
+<center>
+
+<h2>Your Spring Break Destination</h2>
+<p>Flight Prices And Hours From JFK</p>
 
 
-
-<svg height="1000" width="1000">
+<svg height="800" width="800">
 </svg>
+</center>
 
 <script>
 
 var svg = d3.select("svg");
+
+//The center point
+svg.append("circle")
+.attr("id", "center")
+.attr("cx", 400)
+.attr("cy", 400)
+.attr("r", 20)
+.style("fill", "#FFC200");
+
+
+//Variable of each city
+
+//city name
+var city;
+
+//round trip price 
+var price;
+
+//flying hours
+var hours;
+
+//airline
+var airline;
+
+//longitude 
+var lon;
+
+//latitude
+var lat; 
+
+var flightData;
+
+d3.csv("#.csv", function (error, data) {
+	
+		flightData = data;
+
+		flightData.forEach(function (d) {
+			
+			
+		});
+		
+		return ;
+	});
+	
+	var priceExtent = d3.extent(countryData,function (d) { 
+		return d.Population; 
+	});
+
+	console.log(priceExtent);
+
+	var priceScale = d3.scaleLinear().domain(priceExtent).range([20, 400]);
+
+	
+	flightData.forEach(function (d) {
+		svg.append("circle")
+		.attr("cx", )
+		.attr("cy", )
+		.attr("r", priceScale( ))
+		.style("opacity", 0.3);
+		//.style("fill", )
+	});
+});
 
 
 
