@@ -70,8 +70,16 @@ d3.csv("flightData.csv", function (error, data) {
 						.range([50, 400]);
 
 		var hourScale = d3.scaleLinear()
-						.domain([0, 40])
-						.range([0,1]);
+						.domain([0,5,10,15,20,25,30,35,40])
+						.range(['#4575b4',
+							'#74add1',
+							'#abd9e9',
+							'#e0f3f8',
+							'#ffffbf',
+							'#fee090'  ,
+							'#fdae61',
+							'#f46d43',
+							'#d73027']);
 
 		flightData.forEach(function(d) {
 
@@ -84,10 +92,10 @@ d3.csv("flightData.csv", function (error, data) {
 			var x = Math.cos( centerLat )* Math.sin(lat) - Math.sin(centerLat)* Math.cos(lat)* Math.cos(lon - centerLong);
 			var bearing =  Math.atan2(y, x) ;
 
-			console.log(bearing + d.City);
+			//console.log(bearing + d.City);
+			//console.log(d.Hour);
 
 			var r = priceScale(d.Price);
-			//console.log(r);
 
 			var cx = 400 + r * Math.sin(bearing);
 			var cy = 400 + r * Math.cos(bearing)*(-1);
@@ -96,7 +104,7 @@ d3.csv("flightData.csv", function (error, data) {
 			.attr("cx", cx)
 			.attr("cy", cy)
 			.attr("r", 5)
-			.style("opacity", hourScale(d.FlightHour))
+			.attr("fill", hourScale(d.Hour) );
 
 			svg.append("text")
 			.text(d.City)
