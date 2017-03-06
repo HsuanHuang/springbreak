@@ -87,78 +87,49 @@
             })
             
             
-            var region_op = 0.05;
+            var region_op = 0.35;
+            
+            
+            //Bottom Quadrants
+            
+            var region_divisions = [
+                ["#b3cde3",0.37*Math.PI,0.5*Math.PI],
+                ["#ccebc5",0.5*Math.PI,0.75*Math.PI],
+                ["#fbb4ae",0.75*Math.PI,1.25*Math.PI],
+                ["#fed9a6",1.25*Math.PI,1.71*Math.PI],
+                ["#46add4",1.71*Math.PI,2.37*Math.PI]]
+            
+            region_divisions.forEach(function(d){
+                var arc = d3.arc()
+                            .innerRadius(0)
+                            .outerRadius(300)
+                            .startAngle(d[1])
+                            .endAngle(d[2]);
+                
+                svg.append("path")
+                   .attr("d", arc)
+                   .style("fill", d[0])
+                   .style("opacity", region_op)
+                   .attr("transform", "translate(400,1200)");    
+            })
+            
+            
             
             //Top Quadrants
-            //NE
-            var arc = d3.arc()
-                        .innerRadius(0)
-                        .outerRadius(300)
-                        .startAngle(0.37*Math.PI)
-                        .endAngle(0.5*Math.PI);
             
-            svg.append("path")
-                .attr("d", arc)
-                .style("fill", "blue")
-                .style("opacity", region_op)
-                .attr("transform", "translate(400,1200)");
-
-            //SE
-            var arc = d3.arc()
-                        .innerRadius(0)
-                        .outerRadius(300)
-                        .startAngle(0.5*Math.PI)
-                        .endAngle(0.75*Math.PI);
-            
-            svg.append("path")
-                .attr("d", arc)
-                .style("fill", "green")
-                .style("opacity", region_op)
-                .attr("transform", "translate(400,1200)");
-            
-            //S
-            var arc = d3.arc()
-                        .innerRadius(0)
-                        .outerRadius(300)
-                        .startAngle(0.75*Math.PI)
-                        .endAngle(1.25*Math.PI);
-            
-            svg.append("path")
-                .attr("d", arc)
-                .style("fill", "red")
-                .style("opacity", region_op)
-                .attr("transform", "translate(400,1200)");
-            
-            //W
-            var arc = d3.arc()
-                        .innerRadius(0)
-                        .outerRadius(300)
-                        .startAngle(1.25*Math.PI)
-                        .endAngle(1.71*Math.PI);
-            
-            svg.append("path")
-                .attr("d", arc)
-                .style("fill", "yellow")
-                .style("opacity", region_op)
-                .attr("transform", "translate(400,1200)");
-            
-            //N
-            var arc = d3.arc()
-                        .innerRadius(0)
-                        .outerRadius(300)
-                        .startAngle(1.71*Math.PI)
-                        .endAngle(2.37*Math.PI);
-            
-            svg.append("path")
-                .attr("d", arc)
-                .style("fill", "#46add4")
-                .style("opacity", region_op)
-                .attr("transform", "translate(400,1200)");
-
-            
-            
-            
-            
+            region_divisions.forEach(function(d){
+                var arc = d3.arc()
+                            .innerRadius(0)
+                            .outerRadius(400)
+                            .startAngle(d[1])
+                            .endAngle(d[2]);
+                
+                svg.append("path")
+                   .attr("d", arc)
+                   .style("fill", d[0])
+                   .style("opacity", region_op)
+                   .attr("transform", "translate(400,400)");    
+            })
             
             
             
@@ -171,7 +142,7 @@
                 .attr("cy", 400)
                 .attr("r", largePriceScale(300))
                 .style("fill", "gray")
-                .style("opacity", 0.2); 
+                .style("opacity", 0.65); 
             
             var large_prices = [500,700,900,1100]
             
@@ -184,73 +155,7 @@
                     .attr("stroke-width", 0.5)
                     .attr("stroke", "gray") ;
             })
-            
-            //Bottom Quadrants
-            //NE
-            var arc = d3.arc()
-                        .innerRadius(0)
-                        .outerRadius(400)
-                        .startAngle(0.37*Math.PI)
-                        .endAngle(0.5*Math.PI);
-            
-            svg.append("path")
-                .attr("d", arc)
-                .style("fill", "blue")
-                .style("opacity", region_op)
-                .attr("transform", "translate(400,400)");
-
-            //SE
-            var arc = d3.arc()
-                        .innerRadius(0)
-                        .outerRadius(400)
-                        .startAngle(0.5*Math.PI)
-                        .endAngle(0.75*Math.PI);
-            
-            svg.append("path")
-                .attr("d", arc)
-                .style("fill", "green")
-                .style("opacity", region_op)
-                .attr("transform", "translate(400,400)");
-            
-            //S
-            var arc = d3.arc()
-                        .innerRadius(0)
-                        .outerRadius(400)
-                        .startAngle(0.75*Math.PI)
-                        .endAngle(1.25*Math.PI);
-            
-            svg.append("path")
-                .attr("d", arc)
-                .style("fill", "red")
-                .style("opacity", region_op)
-                .attr("transform", "translate(400,400)");
-            
-            //W
-            var arc = d3.arc()
-                        .innerRadius(0)
-                        .outerRadius(400)
-                        .startAngle(1.25*Math.PI)
-                        .endAngle(1.71*Math.PI);
-            
-            svg.append("path")
-                .attr("d", arc)
-                .style("fill", "yellow")
-                .style("opacity", region_op)
-                .attr("transform", "translate(400,400)");
-            
-            //N
-            var arc = d3.arc()
-                        .innerRadius(0)
-                        .outerRadius(400)
-                        .startAngle(1.71*Math.PI)
-                        .endAngle(2.37*Math.PI);
-            
-            svg.append("path")
-                .attr("d", arc)
-                .style("fill", "#46add4")
-                .style("opacity", region_op)
-                .attr("transform", "translate(400,400)");
-            
+                
             
             
             
@@ -355,14 +260,15 @@
 			     var cy_bot = 1200 + r_bot * Math.cos(bearing)*(-1);
 
                  // Top Plot
-                  
-                 svg.append("circle")
-			     .attr("cx", cx_top)
-			     .attr("cy", cy_top)
-			     .attr("r", 4)
-			     .attr("fill", hourScale(d.Hour) );
+
                   
                  if (d.Price > 300) { 
+                     svg.append("circle")
+			         .attr("cx", cx_top)
+			         .attr("cy", cy_top)
+			         .attr("r", 4)
+			         .attr("fill", hourScale(d.Hour) );
+                     
                      svg.append("text")
 			         .text(d.Airport)
 			         .attr("x", cx_top+5)
@@ -391,6 +297,14 @@
                      //.attr("text-anchor", "middle")
                      //.attr("alignment-baseline", "central")
                      .attr("fill", "gray");
+                     
+                     
+                     svg.append("circle")
+			         .attr("cx", cx_top)
+			         .attr("cy", cy_top)
+			         .attr("r", 3)
+			         .attr("fill", hourScale(d.Hour) )
+                     .style("opacity", 0.4);
                  }
 
 
