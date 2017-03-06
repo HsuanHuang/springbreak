@@ -19,15 +19,23 @@
 
             <h2>Your Spring Break Destination</h2>
             <p>Flight Prices And Hours From JFK</p>
-
-            <svg id = "legend" height="200" width="800"></svg>
+            <br>
+            <svg id = "legend" height="200" width="400"></svg>
+            <br><br><br>
             <svg id = "radial" height="1600" width="800">
             </svg>
         </center>
 
         <script>
 
-            // Plotting Legend
+            // Plotting Legend 
+                        
+            var region_divisions = [
+                ["#b3cde3",0.37*Math.PI,0.5*Math.PI],
+                ["#ccebc5",0.5*Math.PI,0.75*Math.PI],
+                ["#fbb4ae",0.75*Math.PI,1.30*Math.PI],
+                ["#fed9a6",1.30*Math.PI,1.71*Math.PI],
+                ["#46add4",1.71*Math.PI,2.37*Math.PI]]
             
             var legend = d3.select("#legend");
     
@@ -42,6 +50,7 @@
                 
 	
 	           states = topojson.feature(rawData, rawData.objects.states);
+               states.features = states.features.splice(2, 50);
 	           showMap();
                 
                 
@@ -49,21 +58,40 @@
 
             function showMap() {
 	
-	           projection.fitExtent([[400,0], [legend.attr("width"), legend.attr("height")]], states);
+	           projection.fitExtent([[0,0], [legend.attr("width"), legend.attr("height")]], states);
 	           pathGenerator = d3.geoPath().projection(projection);
 	
 	           var paths = legend.selectAll("path.country").data(states.features);
                paths.enter().append("path").attr("class","country")
                .merge(paths)
-               .style("fill", "#ccc")
+               .style("fill", "#fff")
                .style("stroke", "#888")
                .attr("d",function (state) {
                     return pathGenerator(state);
                })
+               
+               //Shade Regions
+                region_divisions.forEach(function(d){
+                var arc = d3.arc()
+                            .innerRadius(0)
+                            .outerRadius(300)
+                            .startAngle(d[1])
+                            .endAngle(d[2]);
+                
+                var center = [39.8282,-98.5795];    
+                    
+                legend.append("path")
+                   .attr("d", arc)
+                   .style("fill", d[0])
+                   .style("opacity", 0.6)
+                   .attr("transform", "translate(190,90)");    
+            })
+               
             }
             
             
-            
+            //            var centerLat = Math.radians(39.8282);
+            //var centerLong = Math.radians(-98.5795);
             
             
             
@@ -138,13 +166,6 @@
             
             
             //Bottom Quadrants
-            
-            var region_divisions = [
-                ["#b3cde3",0.37*Math.PI,0.5*Math.PI],
-                ["#ccebc5",0.5*Math.PI,0.75*Math.PI],
-                ["#fbb4ae",0.75*Math.PI,1.25*Math.PI],
-                ["#fed9a6",1.25*Math.PI,1.71*Math.PI],
-                ["#46add4",1.71*Math.PI,2.37*Math.PI]]
             
             region_divisions.forEach(function(d){
                 var arc = d3.arc()
