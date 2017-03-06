@@ -8,7 +8,9 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.js"></script>
         <style>
-            body { font-family: 'Futura', Calibri, sans-serif; }
+            body { font-family: 'Futura', Calibri, sans-serif; 
+            }
+            
         </style>
     </head>
     
@@ -17,7 +19,7 @@
 
         <center>
 
-            <h2>Your Spring Break Destination</h2>
+            <h1>Your Spring Break Destination</h1>
             <p>Flight Prices And Hours From JFK</p>
             <br>
             <svg id = "legend" height="200" width="400"></svg>
@@ -161,7 +163,7 @@
                     .attr("stroke", "gray") ;
                 
                 svg.append("text")
-			         .text(d)
+			         .text("$"+d)
 			         .attr("x", 400)
 			         .attr("y", 1220-smallPriceScale(d))
                      .attr("font-family", "Futura")
@@ -234,11 +236,11 @@
                     .attr("stroke", "gray") ;
                 
                 svg.append("text")
-			         .text(d)
+			         .text("$"+d)
 			         .attr("x", 400)
 			         .attr("y", 410-largePriceScale(d))
                      .attr("font-family", "Futura")
-                     .attr("font-size", "15px")
+                     .attr("font-size", "20px")
                      .attr("text-anchor", "middle")
                      .attr("alignment-baseline", "central")
                      .attr("fill", "gray");
@@ -267,23 +269,23 @@
             .style("stroke-dasharray", "5,5");
             
             
-            // Legends
+            //Legends
             
-            //Flight Time
-            //svg.append("g")
-            //    .attr("class", "legendFlightTime")
-            //    .attr("transform", "translate(100,400)")
-            //    .style("font-size", "10px");
+            //Airline
+            svg.append("g")
+                .attr("class", "legendAirline")
+                .attr("transform", "translate(50,10)")
+                .style("font-size", "10px");
             
-            //var legendFlightTime = d3.legendColor()
-            //    .shape('circle')
-            //    .shapeWidth(20)
-            //    .shapeHeight(20)
-            //    .shapePadding(10)
-            //    .scale(hourScale);
+            var legendAirline = d3.legendColor()
+                .shape('circle')
+                .shapeWidth(20)
+                .shapeHeight(20)
+                .shapePadding(10)
+                .scale(airlineScale);
             
-            //svg.select(".legendFlightTime")
-            //.call(legendFlightTime);
+            svg.select(".legendAirline")
+            .call(legendAirline);
                 
             
             
