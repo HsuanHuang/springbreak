@@ -69,7 +69,7 @@
             svg.append("circle")
                 .attr("id", "center")
                 .attr("cx", 400)
-                .attr("cy", 400)
+                .attr("cy", 1200)
                 .attr("r", 15)
                 //.style("fill", "#FFC200");
                 .style("fill", "gray");          
@@ -79,7 +79,7 @@
             small_prices.forEach(function(d){
                 svg.append("circle")
                     .attr("cx", 400)
-                    .attr("cy", 400)
+                    .attr("cy", 1200)
                     .attr("r", smallPriceScale(d) )
                     .style("fill", "none")
                     .attr("stroke-width", 0.5)
@@ -101,7 +101,7 @@
                 .attr("d", arc)
                 .style("fill", "blue")
                 .style("opacity", region_op)
-                .attr("transform", "translate(400,400)");
+                .attr("transform", "translate(400,1200)");
 
             //SE
             var arc = d3.arc()
@@ -114,7 +114,7 @@
                 .attr("d", arc)
                 .style("fill", "green")
                 .style("opacity", region_op)
-                .attr("transform", "translate(400,400)");
+                .attr("transform", "translate(400,1200)");
             
             //S
             var arc = d3.arc()
@@ -127,7 +127,7 @@
                 .attr("d", arc)
                 .style("fill", "red")
                 .style("opacity", region_op)
-                .attr("transform", "translate(400,400)");
+                .attr("transform", "translate(400,1200)");
             
             //W
             var arc = d3.arc()
@@ -140,7 +140,7 @@
                 .attr("d", arc)
                 .style("fill", "yellow")
                 .style("opacity", region_op)
-                .attr("transform", "translate(400,400)");
+                .attr("transform", "translate(400,1200)");
             
             //N
             var arc = d3.arc()
@@ -153,7 +153,7 @@
                 .attr("d", arc)
                 .style("fill", "#46add4")
                 .style("opacity", region_op)
-                .attr("transform", "translate(400,400)");
+                .attr("transform", "translate(400,1200)");
 
             
             
@@ -168,7 +168,7 @@
             svg.append("circle")
                 .attr("id", "center")
                 .attr("cx", 400)
-                .attr("cy", 1200)
+                .attr("cy", 400)
                 .attr("r", largePriceScale(300))
                 .style("fill", "gray")
                 .style("opacity", 0.2); 
@@ -178,7 +178,7 @@
             large_prices.forEach(function(d){
                 svg.append("circle")
                     .attr("cx", 400)
-                    .attr("cy", 1200)
+                    .attr("cy", 400)
                     .attr("r", largePriceScale(d) )
                     .style("fill", "none")
                     .attr("stroke-width", 0.5)
@@ -188,7 +188,7 @@
             //Bottom Quadrants
             //NE
             var arc = d3.arc()
-                        .innerRadius(largePriceScale(300))
+                        .innerRadius(0)
                         .outerRadius(400)
                         .startAngle(0.37*Math.PI)
                         .endAngle(0.5*Math.PI);
@@ -197,11 +197,11 @@
                 .attr("d", arc)
                 .style("fill", "blue")
                 .style("opacity", region_op)
-                .attr("transform", "translate(400,1200)");
+                .attr("transform", "translate(400,400)");
 
             //SE
             var arc = d3.arc()
-                        .innerRadius(largePriceScale(300))
+                        .innerRadius(0)
                         .outerRadius(400)
                         .startAngle(0.5*Math.PI)
                         .endAngle(0.75*Math.PI);
@@ -210,11 +210,11 @@
                 .attr("d", arc)
                 .style("fill", "green")
                 .style("opacity", region_op)
-                .attr("transform", "translate(400,1200)");
+                .attr("transform", "translate(400,400)");
             
             //S
             var arc = d3.arc()
-                        .innerRadius(largePriceScale(300))
+                        .innerRadius(0)
                         .outerRadius(400)
                         .startAngle(0.75*Math.PI)
                         .endAngle(1.25*Math.PI);
@@ -223,11 +223,11 @@
                 .attr("d", arc)
                 .style("fill", "red")
                 .style("opacity", region_op)
-                .attr("transform", "translate(400,1200)");
+                .attr("transform", "translate(400,400)");
             
             //W
             var arc = d3.arc()
-                        .innerRadius(largePriceScale(300))
+                        .innerRadius(0)
                         .outerRadius(400)
                         .startAngle(1.25*Math.PI)
                         .endAngle(1.71*Math.PI);
@@ -236,11 +236,11 @@
                 .attr("d", arc)
                 .style("fill", "yellow")
                 .style("opacity", region_op)
-                .attr("transform", "translate(400,1200)");
+                .attr("transform", "translate(400,400)");
             
             //N
             var arc = d3.arc()
-                        .innerRadius(largePriceScale(300))
+                        .innerRadius(0)
                         .outerRadius(400)
                         .startAngle(1.71*Math.PI)
                         .endAngle(2.37*Math.PI);
@@ -249,7 +249,7 @@
                 .attr("d", arc)
                 .style("fill", "#46add4")
                 .style("opacity", region_op)
-                .attr("transform", "translate(400,1200)");
+                .attr("transform", "translate(400,400)");
             
             
             
@@ -259,17 +259,17 @@
             //Lines to show scale
             svg.append("line")
 			.attr("x1", 400+smallPriceScale(300)-4)
-			.attr("y1", 450)
+			.attr("y1", 1150)
 			.attr("x2", 400+largePriceScale(300))
-			.attr("y2", 1200)
+			.attr("y2", 400)
             .style("stroke", "gray")
             .style("stroke-dasharray", "5,5");
             
             svg.append("line")
 			.attr("x1", 400-smallPriceScale(300)+4)
-			.attr("y1", 450)
+			.attr("y1", 1150)
 			.attr("x2", 400-largePriceScale(300))
-			.attr("y2", 1200)
+			.attr("y2", 400)
             .style("stroke", "gray")
             .style("stroke-dasharray", "5,5");
             
@@ -277,21 +277,20 @@
             // Legends
             
             //Flight Time
-            svg.append("g")
-                .attr("class", "legendFlightTime")
-                .attr("fill", "black")
-                .attr("transform", "translate(100,400)")
-                .style("font-size", "10px");
+            //svg.append("g")
+            //    .attr("class", "legendFlightTime")
+            //    .attr("transform", "translate(100,400)")
+            //    .style("font-size", "10px");
             
-            var legendFlightTime = d3.legendColor()
-                .shape('circle')
-                .shapeWidth(20)
-                .shapeHeight(20)
-                .shapePadding(10)
-                .scale(hourScale);
+            //var legendFlightTime = d3.legendColor()
+            //    .shape('circle')
+            //    .shapeWidth(20)
+            //    .shapeHeight(20)
+            //    .shapePadding(10)
+            //    .scale(hourScale);
             
-            svg.select(".legendFlightTime")
-            .call(legendFlightTime);
+            //svg.select(".legendFlightTime")
+            //.call(legendFlightTime);
                 
             
             
@@ -346,8 +345,8 @@
 			     //console.log(bearing + d.City);
 			     //console.log(d.Hour);
 
-			     var r_top = smallPriceScale(d.Price);
-                 var r_bot = largePriceScale(d.Price);
+			     var r_top = largePriceScale(d.Price);
+                 var r_bot = smallPriceScale(d.Price);
 
 			     var cx_top = 400 + r_top * Math.sin(bearing);
 			     var cy_top = 400 + r_top * Math.cos(bearing)*(-1);
@@ -356,13 +355,14 @@
 			     var cy_bot = 1200 + r_bot * Math.cos(bearing)*(-1);
 
                  // Top Plot
-                 if (d.Price <= 300) {
-                     svg.append("circle")
-			         .attr("cx", cx_top)
-			         .attr("cy", cy_top)
-			         .attr("r", 4)
-			         .attr("fill", hourScale(d.Hour) );
-                     
+                  
+                 svg.append("circle")
+			     .attr("cx", cx_top)
+			     .attr("cy", cy_top)
+			     .attr("r", 4)
+			     .attr("fill", hourScale(d.Hour) );
+                  
+                 if (d.Price > 300) { 
                      svg.append("text")
 			         .text(d.Airport)
 			         .attr("x", cx_top+5)
@@ -375,7 +375,7 @@
                  }
                      
                  // Bottom Plot
-                 if (d.Price > 300){
+                 if (d.Price <= 300){
                      svg.append("circle")
 			         .attr("cx", cx_bot)
 			         .attr("cy", cy_bot)
