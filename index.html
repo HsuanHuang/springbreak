@@ -1,37 +1,45 @@
 <html>
-<head>
-<title>Spring Break</title>
-<link href="https://fonts.googleapis.com/css?family=Alegreya|Alegreya+Sans" rel="stylesheet">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="http://d3js.org/topojson.v2.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
-<style>
-body { font-family: 'Futura', Calibri, sans-serif; }
-</style>
-</head>
-<body>
+    <head>
+        <title>Spring Break</title>
+        <link href="https://fonts.googleapis.com/css?family=Alegreya|Alegreya+Sans" rel="stylesheet">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="http://d3js.org/topojson.v2.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+        <style>
+            body { font-family: 'Futura', Calibri, sans-serif; }
+        </style>
+    </head>
+    
+    
+    <body>
 
-<center>
+        <center>
 
-<h2>Your Spring Break Destination</h2>
-<p>Flight Prices And Hours From JFK</p>
-
-
-<svg height="800" width="800">
-</svg>
-</center>
-
-<script>
-
-var svg = d3.select("svg");
+            <h2>Your Spring Break Destination</h2>
+            <p>Flight Prices And Hours From JFK</p>
 
 
-var priceScale = d3.scaleLinear()
-				.domain([117, 1104])
-				.range([50, 400]);
+            <svg height="2400" width="800">
+            </svg>
+        </center>
 
-var hourScale = d3.scaleLinear()
+        <script>
+
+            var svg = d3.select("svg");
+
+            // Small Price Scale
+            var smallPriceScale = d3.scaleLinear()
+				.domain([0, 300])
+				.range([0, 300]);
+            
+            // Large Price Scale
+            var largePriceScale = d3.scaleLinear()
+				.domain([0, 1100])
+				.range([0, 400]);
+            
+            
+            var hourScale = d3.scaleLinear()
 				.domain([0,5,10,15,20,25,30,35,40])
 				.range(['#4575b4',
 					'#74add1',
@@ -44,135 +52,189 @@ var hourScale = d3.scaleLinear()
 					'#d73027']);
 
 
-//The center point
-svg.append("circle")
-.attr("id", "center")
-.attr("cx", 400)
-.attr("cy", 400)
-.attr("r", 15)
-//.style("fill", "#FFC200");
-.style("fill", "gray");
+            
+            //Top Center Point
+            svg.append("circle")
+                .attr("id", "center")
+                .attr("cx", 400)
+                .attr("cy", 400)
+                .attr("r", 15)
+                //.style("fill", "#FFC200");
+                .style("fill", "gray");          
+            
+            var small_prices = [100,200,300]
+            
+            small_prices.forEach(function(d){
+                svg.append("circle")
+                    .attr("cx", 400)
+                    .attr("cy", 400)
+                    .attr("r", smallPriceScale(d) )
+                    .style("fill", "none")
+                    .attr("stroke-width", 0.5)
+                    .attr("stroke", "gray") ;
+            })
+            
+            
 
-svg.append("circle")
-.attr("id", "200USD")
-.attr("cx", 400)
-.attr("cy", 400)
-.attr("r", priceScale(200) )
-.style("fill", "none")
-.attr("stroke-width", 0.5)
-.attr("stroke", "gray") ;
+            //Bottom center circle    
+            svg.append("circle")
+                .attr("id", "center")
+                .attr("cx", 400)
+                .attr("cy", 1200)
+                .attr("r", largePriceScale(300))
+                .style("fill", "gray")
+                .style("opacity", 0.2); 
+            
+            var large_prices = [500,700,900,1100]
+            
+            large_prices.forEach(function(d){
+                svg.append("circle")
+                    .attr("cx", 400)
+                    .attr("cy", 1200)
+                    .attr("r", largePriceScale(d) )
+                    .style("fill", "none")
+                    .attr("stroke-width", 0.5)
+                    .attr("stroke", "gray") ;
+            })
+            
+            
+            //Lines to show scale
+            svg.append("line")
+			.attr("x1", 400+smallPriceScale(300))
+			.attr("y1", 450)
+			.attr("x2", 400+largePriceScale(300))
+			.attr("y2", 1200)
+            .style("stroke", "gray");
+            
+            svg.append("line")
+			.attr("x1", 400-smallPriceScale(300))
+			.attr("y1", 450)
+			.attr("x2", 400-largePriceScale(300))
+			.attr("y2", 1200)
+            .style("stroke", "gray");
+            
+            
+            var flightData;
 
-svg.append("circle")
-.attr("id", "400USD")
-.attr("cx", 400)
-.attr("cy", 400)
-.attr("r", priceScale(400))
-.style("fill", "none")
-.attr("stroke-width", 0.5)
-.attr("stroke", "gray") ;
+            var degree;
 
-svg.append("circle")
-.attr("id", "600USD")
-.attr("cx", 400)
-.attr("cy", 400)
-.attr("r", priceScale(600))
-.style("fill", "none")
-.attr("stroke-width", 0.5)
-.attr("stroke", "gray") ;
+            // Converts from degrees to radians.
+            Math.radians = function(degrees) {
+                return degrees * Math.PI / 180;
+            };
 
-svg.append("circle")
-.attr("id", "800USD")
-.attr("cx", 400)
-.attr("cy", 400)
-.attr("r", priceScale(800))
-.style("fill", "none")
-.attr("stroke-width", 0.5)
-.attr("stroke", "gray") ;
+            // Converts from radians to degrees.
+            Math.degrees = function(radians) {
+                return radians * 180 / Math.PI;
+            };
 
-svg.append("circle")
-.attr("id", "1000USD")
-.attr("cx", 400)
-.attr("cy", 400)
-.attr("r", priceScale(1000))
-.style("fill", "none")
-.attr("stroke-width", 0.5)
-.attr("stroke", "gray") ;
+            var centerLat = Math.radians(39.8282);
+            var centerLong = Math.radians(-98.5795);
 
+            var Int_Apo = ["BOS","PHL","ORD","ATL","MIA","MCO","DFW","HOU","DEN","JAC","LAS","PHX","SEA","SFO","LAX","HNL","PUJ","RSD","PVR","CUN"]
 
+            
+            
+            
+            d3.csv("flightData.csv", function (error, data) {
 
-var flightData;
-
-
-
-var degree;
-
-// Converts from degrees to radians.
-Math.radians = function(degrees) {
-  return degrees * Math.PI / 180;
-};
-
-// Converts from radians to degrees.
-Math.degrees = function(radians) {
-  return radians * 180 / Math.PI;
-};
-
-var centerLat = Math.radians(39.8282);
-var centerLong = Math.radians(-98.5795);
-
-
-
-d3.csv("flightData.csv", function (error, data) {
-
-		flightData = data;
-		//console.log(flightData);
+		      flightData = data;
+		      //console.log(flightData);
 
 		
 
 
-		flightData.forEach(function(d) {
+		      flightData.forEach(function(d) {
 
 
-			var lon = Math.radians( d.Long );
+			     var lon = Math.radians( d.Long );
 			
-			var lat = Math.radians( d.Lat );
+			     var lat = Math.radians( d.Lat );
 
-			var y = Math.sin(lon - centerLong)* Math.cos(lat);
-			var x = Math.cos( centerLat )* Math.sin(lat) - Math.sin(centerLat)* Math.cos(lat)* Math.cos(lon - centerLong);
-			var bearing =  Math.atan2(y, x) ;
+			     var y = Math.sin(lon - centerLong)* Math.cos(lat);
+			     var x = Math.cos( centerLat )* Math.sin(lat) - Math.sin(centerLat)* Math.cos(lat)* Math.cos(lon - centerLong);
+			     var bearing =  Math.atan2(y, x) ;
 
-			//console.log(bearing + d.City);
-			//console.log(d.Hour);
+			     //console.log(bearing + d.City);
+			     //console.log(d.Hour);
 
-			var r = priceScale(d.Price);
+			     var r_top = smallPriceScale(d.Price);
+                 var r_bot = largePriceScale(d.Price);
 
-			var cx = 400 + r * Math.sin(bearing);
-			var cy = 400 + r * Math.cos(bearing)*(-1);
+			     var cx_top = 400 + r_top * Math.sin(bearing);
+			     var cy_top = 400 + r_top * Math.cos(bearing)*(-1);
+                  
+			     var cx_bot = 400 + r_bot * Math.sin(bearing);
+			     var cy_bot = 1200 + r_bot * Math.cos(bearing)*(-1);
 
-			svg.append("circle")
-			.attr("cx", cx)
-			.attr("cy", cy)
-			.attr("r", 5)
-			.attr("fill", hourScale(d.Hour) );
+                 // Top Plot
+                 if (d.Price <= 300) {
+                     svg.append("circle")
+			         .attr("cx", cx_top)
+			         .attr("cy", cy_top)
+			         .attr("r", 3)
+			         .attr("fill", hourScale(d.Hour) );
+                     
+                     svg.append("text")
+			         .text(d.Airport)
+			         .attr("x", cx_top+5)
+			         .attr("y", cy_top+6)
+                     .attr("font-family", "Futura")
+                     .attr("font-size", "10px")
+                     //.attr("text-anchor", "middle")
+                     //.attr("alignment-baseline", "central")
+                     .attr("fill", "gray");
+                 }
+                     
+                 // Bottom Plot
+                 if (d.Price > 300){
+                     svg.append("circle")
+			         .attr("cx", cx_bot)
+			         .attr("cy", cy_bot)
+			         .attr("r", 3)
+			         .attr("fill", hourScale(d.Hour) );
+                     
+                     svg.append("text")
+			         .text(d.Airport)
+			         .attr("x", cx_bot+5)
+			         .attr("y", cy_bot+6)
+                     .attr("font-family", "Futura")
+                     .attr("font-size", "10px")
+                     //.attr("text-anchor", "middle")
+                     //.attr("alignment-baseline", "central")
+                     .attr("fill", "gray");
+                 }
 
-			svg.append("text")
-			.text(d.City)
-			.attr("x", cx+5)
-			.attr("y", cy+5)
-            .attr("font-family", "Futura")
-            .attr("font-size", "10px")
-            .attr("fill", "gray");
 
-		 });
-});
+                 //if (Int_Apo.indexOf(d.Airport) >= 0){
+			       //  svg.append("text")
+			     //    .text(d.Airport)
+			     //    .attr("x", cx_bot+5)
+			     //    .attr("y", cy_bot+6)
+                //     .attr("font-family", "Futura")
+                  //   .attr("font-size", "10px")
+                   //.attr("text-anchor", "middle")
+                //     .attr("alignment-baseline", "central")
+                //     .attr("fill", "gray");
+                
+                //     svg.append("line")
+			     //    .attr("x1", cx_bot)
+			     //    .attr("y1", cy_bot)
+			     //    .attr("x2", cx_bot+5)
+			     //    .attr("y2", cy_bot+4)
+                //     .style("stroke", "gray");
+                //}
+		      });
+            });
 	
 
 
 
 
-</script>
-
-
-
-
-</body>
+        </script>
+    </body>
+    
+    
+    
+    
 </html>
