@@ -8,7 +8,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
 <style>
 body { font-family: 'Futura', Calibri, sans-serif; }
-svg { border: solid #ccc 1px; }
 </style>
 </head>
 <body>
@@ -27,13 +26,77 @@ svg { border: solid #ccc 1px; }
 
 var svg = d3.select("svg");
 
+
+var priceScale = d3.scaleLinear()
+				.domain([117, 1104])
+				.range([50, 400]);
+
+var hourScale = d3.scaleLinear()
+				.domain([0,5,10,15,20,25,30,35,40])
+				.range(['#4575b4',
+					'#74add1',
+					'#abd9e9',
+					'#e0f3f8',
+					'#ffffbf',
+					'#fee090'  ,
+					'#fdae61',
+					'#f46d43',
+					'#d73027']);
+
+
 //The center point
 svg.append("circle")
 .attr("id", "center")
 .attr("cx", 400)
 .attr("cy", 400)
-.attr("r", 20)
-.style("fill", "#FFC200");
+.attr("r", 15)
+//.style("fill", "#FFC200");
+.style("fill", "gray");
+
+svg.append("circle")
+.attr("id", "200USD")
+.attr("cx", 400)
+.attr("cy", 400)
+.attr("r", priceScale(200) )
+.style("fill", "none")
+.attr("stroke-width", 0.5)
+.attr("stroke", "gray") ;
+
+svg.append("circle")
+.attr("id", "400USD")
+.attr("cx", 400)
+.attr("cy", 400)
+.attr("r", priceScale(400))
+.style("fill", "none")
+.attr("stroke-width", 0.5)
+.attr("stroke", "gray") ;
+
+svg.append("circle")
+.attr("id", "600USD")
+.attr("cx", 400)
+.attr("cy", 400)
+.attr("r", priceScale(600))
+.style("fill", "none")
+.attr("stroke-width", 0.5)
+.attr("stroke", "gray") ;
+
+svg.append("circle")
+.attr("id", "800USD")
+.attr("cx", 400)
+.attr("cy", 400)
+.attr("r", priceScale(800))
+.style("fill", "none")
+.attr("stroke-width", 0.5)
+.attr("stroke", "gray") ;
+
+svg.append("circle")
+.attr("id", "1000USD")
+.attr("cx", 400)
+.attr("cy", 400)
+.attr("r", priceScale(1000))
+.style("fill", "none")
+.attr("stroke-width", 0.5)
+.attr("stroke", "gray") ;
 
 
 
@@ -65,21 +128,6 @@ d3.csv("flightData.csv", function (error, data) {
 
 		
 
-		var priceScale = d3.scaleLinear()
-						.domain([117, 1104])
-						.range([50, 400]);
-
-		var hourScale = d3.scaleLinear()
-						.domain([0,5,10,15,20,25,30,35,40])
-						.range(['#4575b4',
-							'#74add1',
-							'#abd9e9',
-							'#e0f3f8',
-							'#ffffbf',
-							'#fee090'  ,
-							'#fdae61',
-							'#f46d43',
-							'#d73027']);
 
 		flightData.forEach(function(d) {
 
