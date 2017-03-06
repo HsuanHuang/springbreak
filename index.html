@@ -20,14 +20,57 @@
             <h2>Your Spring Break Destination</h2>
             <p>Flight Prices And Hours From JFK</p>
 
-
-            <svg height="2400" width="800">
+            <svg id = "legend" height="200" width="800"></svg>
+            <svg id = "radial" height="1600" width="800">
             </svg>
         </center>
 
         <script>
 
-            var svg = d3.select("svg");
+            // Plotting Legend
+            
+            var legend = d3.select("#legend");
+    
+            var projection = d3.geoAlbersUsa().scale(75);
+            var pathGenerator = d3.geoPath().projection(projection);
+
+            var rawData;
+            var states;
+
+            d3.json("us.json", function (error, data) {
+	           rawData = data;
+                
+	
+	           states = topojson.feature(rawData, rawData.objects.states);
+	           showMap();
+                
+                
+            });
+
+            function showMap() {
+	
+	           projection.fitExtent([[400,0], [legend.attr("width"), legend.attr("height")]], states);
+	           pathGenerator = d3.geoPath().projection(projection);
+	
+	           var paths = legend.selectAll("path.country").data(states.features);
+               paths.enter().append("path").attr("class","country")
+               .merge(paths)
+               .style("fill", "#ccc")
+               .style("stroke", "#888")
+               .attr("d",function (state) {
+                    return pathGenerator(state);
+               })
+            }
+            
+            
+            
+            
+            
+            
+            
+            // Plotting Radial Plots
+            
+            var svg = d3.select("#radial");
 
             // Small Price Scale
             var smallPriceScale = d3.scaleLinear()
@@ -58,6 +101,10 @@
 					'#c11853',
                     '#a50067',                    
                     '#800080']);
+            
+            var airlineScale = d3.scaleOrdinal()
+                .domain(["American","Delta","JetBlue","Alaska","COPA"])
+                .range(["blue","red","turquoise","grey","yellow"]);
 
 
             
@@ -267,10 +314,10 @@
 			         .attr("cx", cx_top)
 			         .attr("cy", cy_top)
 			         .attr("r", 4)
-			         .attr("fill", hourScale(d.Hour) );
+			         .attr("fill", airlineScale(d.Airlines) );
                      
                      svg.append("text")
-			         .text(d.Airport)
+			         .text(d.City)
 			         .attr("x", cx_top+5)
 			         .attr("y", cy_top+6)
                      .attr("font-family", "Futura")
@@ -286,14 +333,14 @@
 			         .attr("cx", cx_bot)
 			         .attr("cy", cy_bot)
 			         .attr("r", 4)
-			         .attr("fill", hourScale(d.Hour) );
+			         .attr("fill", airlineScale(d.Airlines) );
                      
                      svg.append("text")
-			         .text(d.Airport)
+			         .text(d.City)
 			         .attr("x", cx_bot+5)
 			         .attr("y", cy_bot+6)
                      .attr("font-family", "Futura")
-                     .attr("font-size", "10px")
+                     .attr("font-size", "11px")
                      //.attr("text-anchor", "middle")
                      //.attr("alignment-baseline", "central")
                      .attr("fill", "gray");
@@ -303,7 +350,7 @@
 			         .attr("cx", cx_top)
 			         .attr("cy", cy_top)
 			         .attr("r", 3)
-			         .attr("fill", hourScale(d.Hour) )
+			         .attr("fill", airlineScale(d.Airlines) )
                      .style("opacity", 0.4);
                  }
 

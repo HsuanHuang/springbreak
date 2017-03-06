@@ -1,6 +1,6 @@
 ,Airport,City,Country,Lat,Long,Airlines,Stops,Hour,Price
 0,SMF,Sacramento,United States,38.695400238,-121.591003417,American,1,9,534
-1,MSY,New Orleans,United States,29.993400574,-90.25800324,Jet Blue,1,13,295
+1,MSY,New Orleans,United States,29.993400574,-90.25800324,JetBlue,1,13,295
 2,ALB,Albany,United States,42.74829865,-73.80169678,American,1,6,451
 3,ROC,Rochester,United States,43.1189003,-77.67240143,Delta,0,1,181
 4,CLE,Cleveland,United States,41.4117012,-81.84980011,Delta,0,2,398
@@ -71,4 +71,5 @@
 69,PVR,Puerto Vallarta,Mexico,20.68009949,-105.2539978,American,2,10,619
 70,CUN,Cancun,Mexico,21.03650093,-86.87709808,Delta,0,4,297
 71,SAT,San Antonio,United States,29.5337009430,-98.469802856,Delta,0,5,346
-71,SAT,Tampa,United States,27.975500107,-82.533203125,Jet Blue,0,3,163
+72,TPA,Tampa,United States,27.975500107,-82.533203125,JetBlue,0,3,163
+72,SAV,Savannah,United States,32.12760162,-81.20210266,JetBlue,0,3,219
