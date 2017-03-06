@@ -1,5 +1,6 @@
 ,Airport,City,Country,Lat,Long,Airlines,Stops,Hour,Price
-1,BTV,Burlington,United States,44.47190094,-73.15329742,JetBlue,0,1,178
+0,SMF,Sacramento,United States,38.695400238,-121.591003417,American,1,9,534
+1,MSY,New Orleans,United States,29.993400574,-90.25800324,Jet Blue,1,13,295
 2,ALB,Albany,United States,42.74829865,-73.80169678,American,1,6,451
 3,ROC,Rochester,United States,43.1189003,-77.67240143,Delta,0,1,181
 4,CLE,Cleveland,United States,41.4117012,-81.84980011,Delta,0,2,398
@@ -45,10 +46,10 @@
 44,HVR,Havre,United States,48.54299927,-109.762001,Delta,2,14,697
 45,GDV,Glendive,United States,47.13869858,-104.8069992,Delta,2,14,697
 46,BIL,Billings,United States,45.80770111,-108.5429993,Delta,1,7,464
-47,MSO,Missoula,United States,46.91630173,-114.0910034,Delta,1,8,512
+47,YUL,Montreal,Canada,45.4706600128,-73.7407989502,American,0,2,172
 48,BOI,Boise,United States,43.56439972,-116.2229996,Delta,2,14,595
 49,JAC,Jacksn Hole,United States,43.6072998,-110.737999,Delta,1,7,692
-50,CPR,Casper,United States,42.90800095,-106.4639969,Delta,2,15,623
+50,YHM,Toronto,Canada,43.17359924,-79.93499756,Delta,1,26,616
 51,COD,Cody,United States,44.52019882,-109.0240021,Delta,1,7,635
 52,SLC,Salt Lake City,United States,40.78839874,-111.9779968,Delta,0,5,316
 53,RNO,Reno,United States,39.49909973,-119.7679977,JetBlue,0,7,301
@@ -69,3 +70,5 @@
 68,RSD,Rock Sound,Bahamas,24.89507873,-76.17688179,COPA,2,40,1104
 69,PVR,Puerto Vallarta,Mexico,20.68009949,-105.2539978,American,2,10,619
 70,CUN,Cancun,Mexico,21.03650093,-86.87709808,Delta,0,4,297
+71,SAT,San Antonio,United States,29.5337009430,-98.469802856,Delta,0,5,346
+71,SAT,Tampa,United States,27.975500107,-82.533203125,Jet Blue,0,3,163
