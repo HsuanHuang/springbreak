@@ -6,6 +6,7 @@
         <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="http://d3js.org/topojson.v2.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.js"></script>
         <style>
             body { font-family: 'Futura', Calibri, sans-serif; }
         </style>
@@ -40,18 +41,29 @@
             
             
             var hourScale = d3.scaleLinear()
-				.domain([0,5,10,15,20,25,30,35,40])
-				.range(['#4575b4',
-					'#74add1',
-					'#abd9e9',
-					'#e0f3f8',
+				.domain([0,1,2,3,4,6,8,10,15,20,30,40])
+				.range([
+                    //Blue Scale
+					'#00008b',
+                    '#3e3e9f',
+					'#6a6db2',
+                    '#d7dcd6',
+                    //Yellow Scale
 					'#ffffbf',
-					'#fee090'  ,
+					'#fee090',
 					'#fdae61',
 					'#f46d43',
-					'#d73027']);
+                    //Red Scale
+					'#d73141',     
+					'#c11853',
+                    '#a50067',                    
+                    '#800080']);
 
 
+            
+            
+            
+            //TOP GRAPH
             
             //Top Center Point
             svg.append("circle")
@@ -75,7 +87,83 @@
             })
             
             
+            var region_op = 0.05;
+            
+            //Top Quadrants
+            //NE
+            var arc = d3.arc()
+                        .innerRadius(0)
+                        .outerRadius(300)
+                        .startAngle(0.37*Math.PI)
+                        .endAngle(0.5*Math.PI);
+            
+            svg.append("path")
+                .attr("d", arc)
+                .style("fill", "blue")
+                .style("opacity", region_op)
+                .attr("transform", "translate(400,400)");
 
+            //SE
+            var arc = d3.arc()
+                        .innerRadius(0)
+                        .outerRadius(300)
+                        .startAngle(0.5*Math.PI)
+                        .endAngle(0.75*Math.PI);
+            
+            svg.append("path")
+                .attr("d", arc)
+                .style("fill", "green")
+                .style("opacity", region_op)
+                .attr("transform", "translate(400,400)");
+            
+            //S
+            var arc = d3.arc()
+                        .innerRadius(0)
+                        .outerRadius(300)
+                        .startAngle(0.75*Math.PI)
+                        .endAngle(1.25*Math.PI);
+            
+            svg.append("path")
+                .attr("d", arc)
+                .style("fill", "red")
+                .style("opacity", region_op)
+                .attr("transform", "translate(400,400)");
+            
+            //W
+            var arc = d3.arc()
+                        .innerRadius(0)
+                        .outerRadius(300)
+                        .startAngle(1.25*Math.PI)
+                        .endAngle(1.71*Math.PI);
+            
+            svg.append("path")
+                .attr("d", arc)
+                .style("fill", "yellow")
+                .style("opacity", region_op)
+                .attr("transform", "translate(400,400)");
+            
+            //N
+            var arc = d3.arc()
+                        .innerRadius(0)
+                        .outerRadius(300)
+                        .startAngle(1.71*Math.PI)
+                        .endAngle(2.37*Math.PI);
+            
+            svg.append("path")
+                .attr("d", arc)
+                .style("fill", "#46add4")
+                .style("opacity", region_op)
+                .attr("transform", "translate(400,400)");
+
+            
+            
+            
+            
+            
+            
+            
+            //BOTTOM GRAPH
+            
             //Bottom center circle    
             svg.append("circle")
                 .attr("id", "center")
@@ -97,23 +185,123 @@
                     .attr("stroke", "gray") ;
             })
             
+            //Bottom Quadrants
+            //NE
+            var arc = d3.arc()
+                        .innerRadius(largePriceScale(300))
+                        .outerRadius(400)
+                        .startAngle(0.37*Math.PI)
+                        .endAngle(0.5*Math.PI);
+            
+            svg.append("path")
+                .attr("d", arc)
+                .style("fill", "blue")
+                .style("opacity", region_op)
+                .attr("transform", "translate(400,1200)");
+
+            //SE
+            var arc = d3.arc()
+                        .innerRadius(largePriceScale(300))
+                        .outerRadius(400)
+                        .startAngle(0.5*Math.PI)
+                        .endAngle(0.75*Math.PI);
+            
+            svg.append("path")
+                .attr("d", arc)
+                .style("fill", "green")
+                .style("opacity", region_op)
+                .attr("transform", "translate(400,1200)");
+            
+            //S
+            var arc = d3.arc()
+                        .innerRadius(largePriceScale(300))
+                        .outerRadius(400)
+                        .startAngle(0.75*Math.PI)
+                        .endAngle(1.25*Math.PI);
+            
+            svg.append("path")
+                .attr("d", arc)
+                .style("fill", "red")
+                .style("opacity", region_op)
+                .attr("transform", "translate(400,1200)");
+            
+            //W
+            var arc = d3.arc()
+                        .innerRadius(largePriceScale(300))
+                        .outerRadius(400)
+                        .startAngle(1.25*Math.PI)
+                        .endAngle(1.71*Math.PI);
+            
+            svg.append("path")
+                .attr("d", arc)
+                .style("fill", "yellow")
+                .style("opacity", region_op)
+                .attr("transform", "translate(400,1200)");
+            
+            //N
+            var arc = d3.arc()
+                        .innerRadius(largePriceScale(300))
+                        .outerRadius(400)
+                        .startAngle(1.71*Math.PI)
+                        .endAngle(2.37*Math.PI);
+            
+            svg.append("path")
+                .attr("d", arc)
+                .style("fill", "#46add4")
+                .style("opacity", region_op)
+                .attr("transform", "translate(400,1200)");
+            
+            
+            
+            
+            
             
             //Lines to show scale
             svg.append("line")
-			.attr("x1", 400+smallPriceScale(300))
+			.attr("x1", 400+smallPriceScale(300)-4)
 			.attr("y1", 450)
 			.attr("x2", 400+largePriceScale(300))
 			.attr("y2", 1200)
-            .style("stroke", "gray");
+            .style("stroke", "gray")
+            .style("stroke-dasharray", "5,5");
             
             svg.append("line")
-			.attr("x1", 400-smallPriceScale(300))
+			.attr("x1", 400-smallPriceScale(300)+4)
 			.attr("y1", 450)
 			.attr("x2", 400-largePriceScale(300))
 			.attr("y2", 1200)
-            .style("stroke", "gray");
+            .style("stroke", "gray")
+            .style("stroke-dasharray", "5,5");
             
             
+            // Legends
+            
+            //Flight Time
+            svg.append("g")
+                .attr("class", "legendFlightTime")
+                .attr("fill", "black")
+                .attr("transform", "translate(100,400)")
+                .style("font-size", "10px");
+            
+            var legendFlightTime = d3.legendColor()
+                .shape('circle')
+                .shapeWidth(20)
+                .shapeHeight(20)
+                .shapePadding(10)
+                .scale(hourScale);
+            
+            svg.select(".legendFlightTime")
+            .call(legendFlightTime);
+                
+            
+            
+            
+            //Region
+            
+            
+            
+            
+            //FUNCTIONS
             var flightData;
 
             var degree;
@@ -172,7 +360,7 @@
                      svg.append("circle")
 			         .attr("cx", cx_top)
 			         .attr("cy", cy_top)
-			         .attr("r", 3)
+			         .attr("r", 4)
 			         .attr("fill", hourScale(d.Hour) );
                      
                      svg.append("text")
@@ -191,7 +379,7 @@
                      svg.append("circle")
 			         .attr("cx", cx_bot)
 			         .attr("cy", cy_bot)
-			         .attr("r", 3)
+			         .attr("r", 4)
 			         .attr("fill", hourScale(d.Hour) );
                      
                      svg.append("text")
