@@ -147,7 +147,7 @@
                 .attr("cy", 1200)
                 .attr("r", 15)
                 //.style("fill", "#FFC200");
-                .style("fill", "gray");          
+                .style("fill", "black");          
             
             var small_prices = [100,200,300]
             
@@ -159,6 +159,16 @@
                     .style("fill", "none")
                     .attr("stroke-width", 0.5)
                     .attr("stroke", "gray") ;
+                
+                svg.append("text")
+			         .text(d)
+			         .attr("x", 400)
+			         .attr("y", 1220-smallPriceScale(d))
+                     .attr("font-family", "Futura")
+                     .attr("font-size", "15px")
+                     .attr("text-anchor", "middle")
+                     .attr("alignment-baseline", "central")
+                     .attr("fill", "gray");
             })
             
             
@@ -222,6 +232,16 @@
                     .style("fill", "none")
                     .attr("stroke-width", 0.5)
                     .attr("stroke", "gray") ;
+                
+                svg.append("text")
+			         .text(d)
+			         .attr("x", 400)
+			         .attr("y", 410-largePriceScale(d))
+                     .attr("font-family", "Futura")
+                     .attr("font-size", "15px")
+                     .attr("text-anchor", "middle")
+                     .attr("alignment-baseline", "central")
+                     .attr("fill", "gray");
             })
                 
             
