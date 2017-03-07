@@ -26,13 +26,17 @@
             <br><br><br>
             <h2>Choose your  Price</h2>
             <svg id = "radial" height="2000" width="800">
+            <h2>Check by number of Stops</h2>
+            <svg id = "stops" height="1000" width="800">
+            </svg>
+            <h2>Check by Price per Mile</h2>
+            <svg id = "ppm" height="1000" width="800">
             </svg>
         </center>
-
+    
         <script>
-
-            // Plotting Legend 
-                        
+        //Plotting Region Legend
+            
             var region_divisions = [
                 ["#b3cde3",0.37*Math.PI,0.5*Math.PI],
                 ["#ccebc5",0.5*Math.PI,0.75*Math.PI],
@@ -92,14 +96,12 @@
                
             }
             
-            
-            //            var centerLat = Math.radians(39.8282);
-            //var centerLong = Math.radians(-98.5795);
+        </script>
             
             
             
-            
-            // Plotting Radial Plots
+        <script>
+        // Plotting Radial Plots
             
             var svg = d3.select("#radial");
 
@@ -113,7 +115,7 @@
 				.domain([0, 1100])
 				.range([0, 400]);
             
-            
+            // Hour Scale
             var hourScale = d3.scaleLinear()
 				.domain([0,1,2,3,4,6,8,10,15,20,30,40])
 				.range([
@@ -133,17 +135,16 @@
                     '#a50067',                    
                     '#800080']);
             
+            // Airline Scale
             var airlineScale = d3.scaleOrdinal()
                 .domain(["American","Delta","JetBlue","Alaska","COPA"])
                 .range(["blue","red","turquoise","grey","yellow"]);
 
 
             
-            
-            
             //TOP GRAPH
             
-            //Label Top Graph
+            //Label
             svg.append("text")
 			   .text("Under $300")
 			   .attr("x", 400)
@@ -155,7 +156,7 @@
                .attr("fill", "gray");
             
             
-            //Top Center Point
+            //Center Point
             svg.append("circle")
                 .attr("id", "center")
                 .attr("cx", 400)
@@ -186,11 +187,10 @@
                      .attr("fill", "gray");
             })
             
-            
             var region_op = 0.35;
             
             
-            //Bottom Quadrants
+            //Quadrants
             
             region_divisions.forEach(function(d){
                 var arc = d3.arc()
@@ -206,23 +206,6 @@
                    .attr("transform", "translate(400,400)");    
             })
             
-            
-            
-            //Top Quadrants
-            
-            region_divisions.forEach(function(d){
-                var arc = d3.arc()
-                            .innerRadius(0)
-                            .outerRadius(400)
-                            .startAngle(d[1])
-                            .endAngle(d[2]);
-                
-                svg.append("path")
-                   .attr("d", arc)
-                   .style("fill", d[0])
-                   .style("opacity", region_op)
-                   .attr("transform", "translate(400,1400)");    
-            })
             
             
             
@@ -271,6 +254,23 @@
             })
                 
             
+            // Quadrants
+            
+            region_divisions.forEach(function(d){
+                var arc = d3.arc()
+                            .innerRadius(0)
+                            .outerRadius(400)
+                            .startAngle(d[1])
+                            .endAngle(d[2]);
+                
+                svg.append("path")
+                   .attr("d", arc)
+                   .style("fill", d[0])
+                   .style("opacity", region_op)
+                   .attr("transform", "translate(400,1400)");    
+            })
+            
+            
             
             
             
@@ -310,17 +310,11 @@
             
             svg.select(".legendAirline")
             .call(legendAirline);
-                
-            
-            
-            
-            //Region
             
             
             
             
             //FUNCTIONS
-            var flightData;
 
             var degree;
 
@@ -341,6 +335,11 @@
 
             
             
+            var flightData;
+            
+            var counter_0 = 0;
+            var counter_1 = 0;
+            var counter_2 = 0;
             
             d3.csv("flightData.csv", function (error, data) {
 
@@ -374,8 +373,6 @@
 			     var cy_bot = 1400 + r_bot * Math.cos(bearing)*(-1);
 
                  // Top Plot
-
-                  
                  if (d.Price <= 300) { 
                      svg.append("circle")
 			         .attr("cx", cx_top)
@@ -420,7 +417,45 @@
                      .attr("fill", "gray");
                  }
 
-
+                // Write Names under Stops
+                if(d.Stops == 0){
+                    stops.append("text")
+			         .text(d.City)
+			         .attr("x", dotScale(0))
+			         .attr("y", 150+counter_0*15)
+                     .attr("font-size", "15px")
+                     .attr("text-anchor", "middle")
+                     .attr("alignment-baseline", "central");
+                           
+                    counter_0 = counter_0 + 1;
+                }
+                  
+                if(d.Stops == 1){
+                    stops.append("text")
+			         .text(d.City)
+			         .attr("x", dotScale(1))
+			         .attr("y", 150+counter_1*15)
+                     .attr("font-size", "15px")
+                     .attr("text-anchor", "middle")
+                     .attr("alignment-baseline", "central");
+                           
+                    counter_1 = counter_1 + 1;
+                }
+                  
+                if(d.Stops == 2){
+                    stops.append("text")
+			         .text(d.City)
+			         .attr("x", dotScale(2))
+			         .attr("y", 150+counter_2*15)
+                     .attr("font-size", "15px")
+                     .attr("text-anchor", "middle")
+                     .attr("alignment-baseline", "central");
+                           
+                    counter_2 = counter_2 + 1;
+                }
+                  
+                  
+                  
                  //if (Int_Apo.indexOf(d.Airport) >= 0){
 			       //  svg.append("text")
 			     //    .text(d.Airport)
@@ -441,11 +476,77 @@
                 //}
 		      });
             });
-	
 
+        </script>
 
+        <script>
+        // Plotting Number of Stops
+            
+            var stops = d3.select("#stops");
+            
+            // Dot Placement Scale
+            var dotScale = d3.scaleLinear()
+				.domain([-1, 2])
+				.range([100, 700]);
+            
+            var dots  = [[2,'#ff4f00'],
+                         [1,"#ffa700"],
+                         [0,'#599f00'],
+                         [-1,'#222222']];
+            
+            //Create Dots
+            dots.forEach(function(d){
+                
+                if (d[0] >= 0){
+                    stops.append("line")
+			         .attr("x1", dotScale(d[0]-1))
+			         .attr("y1", 100)
+			         .attr("x2", dotScale(d[0]))
+			         .attr("y2", 100)
+                     .style("stroke", d[1])
+                     .style("stroke-width", "20");
+                }
 
+                stops.append("circle")
+                .attr("cx", dotScale(d[0]))
+                .attr("cy", 100)
+                .attr("r", 40)
+                .style("fill", d[1]);
+                
+                stops.append("circle")
+                .attr("cx", dotScale(d[0]))
+                .attr("cy", 100)
+                .attr("r", 25)
+                .style("fill", "white")
+                .style("opacity", 0.6);
+                
+                if (d[0] >= 0) {
+                    stops.append("text")
+			         .text(d[0])
+			         .attr("x", dotScale(d[0]))
+			         .attr("y", 100)
+                     .attr("font-size", "40px")
+                     .attr("text-anchor", "middle")
+                     .attr("alignment-baseline", "central")
+                     .attr("fill", d[1]);
+                }
+            })
+            
+            
+            
+            //Write Names under Stops
 
+            
+            flightData.forEach(function(d){
+
+                
+                
+
+            })
+                
+
+            
+            
         </script>
     </body>
     
