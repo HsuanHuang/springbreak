@@ -19,11 +19,12 @@
 
         <center>
 
-            <h1>Your Spring Break Destination</h1>
-            <p>Flight Prices And Hours From JFK</p>
-            <br>
+            <h1>Where Can I go to from NYC This Spring Break?</h1>
+            <p>Cheapest roundtrip flights leaving JFK from April 1 to April 8</p>
+            <h2>Choose your Travel Region</h2>
             <svg id = "legend" height="200" width="400"></svg>
             <br><br><br>
+            <h2>Choose your  Price</h2>
             <svg id = "radial" height="2000" width="800">
             </svg>
         </center>
@@ -144,7 +145,7 @@
             
             //Label Top Graph
             svg.append("text")
-			   .text("Destinations for under $300")
+			   .text("Under $300")
 			   .attr("x", 400)
 			   .attr("y", 50)
                .attr("font-family", "Futura")
@@ -297,7 +298,7 @@
             //Airline
             svg.append("g")
                 .attr("class", "legendAirline")
-                .attr("transform", "translate(50,10)")
+                .attr("transform", "translate(50,100)")
                 .style("font-size", "15px");
             
             var legendAirline = d3.legendColor()
