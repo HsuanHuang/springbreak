@@ -24,7 +24,7 @@
             <br>
             <svg id = "legend" height="200" width="400"></svg>
             <br><br><br>
-            <svg id = "radial" height="1600" width="800">
+            <svg id = "radial" height="2000" width="800">
             </svg>
         </center>
 
@@ -142,11 +142,23 @@
             
             //TOP GRAPH
             
+            //Label Top Graph
+            svg.append("text")
+			   .text("Destinations for under $300")
+			   .attr("x", 400)
+			   .attr("y", 50)
+               .attr("font-family", "Futura")
+               .attr("font-size", "40px")
+               .attr("text-anchor", "middle")
+               .attr("alignment-baseline", "central")
+               .attr("fill", "gray");
+            
+            
             //Top Center Point
             svg.append("circle")
                 .attr("id", "center")
                 .attr("cx", 400)
-                .attr("cy", 1200)
+                .attr("cy", 400)
                 .attr("r", 15)
                 //.style("fill", "#FFC200");
                 .style("fill", "black");          
@@ -156,7 +168,7 @@
             small_prices.forEach(function(d){
                 svg.append("circle")
                     .attr("cx", 400)
-                    .attr("cy", 1200)
+                    .attr("cy", 400)
                     .attr("r", smallPriceScale(d) )
                     .style("fill", "none")
                     .attr("stroke-width", 0.5)
@@ -165,9 +177,9 @@
                 svg.append("text")
 			         .text("$"+d)
 			         .attr("x", 400)
-			         .attr("y", 1220-smallPriceScale(d))
+			         .attr("y", 410-smallPriceScale(d))
                      .attr("font-family", "Futura")
-                     .attr("font-size", "15px")
+                     .attr("font-size", "20px")
                      .attr("text-anchor", "middle")
                      .attr("alignment-baseline", "central")
                      .attr("fill", "gray");
@@ -190,7 +202,7 @@
                    .attr("d", arc)
                    .style("fill", d[0])
                    .style("opacity", region_op)
-                   .attr("transform", "translate(400,1200)");    
+                   .attr("transform", "translate(400,400)");    
             })
             
             
@@ -208,28 +220,39 @@
                    .attr("d", arc)
                    .style("fill", d[0])
                    .style("opacity", region_op)
-                   .attr("transform", "translate(400,400)");    
+                   .attr("transform", "translate(400,1400)");    
             })
             
             
             
             //BOTTOM GRAPH
             
+            
+            svg.append("text")
+			   .text("Greater than $300")
+			   .attr("x", 400)
+			   .attr("y", 920)
+               .attr("font-family", "Futura")
+               .attr("font-size", "40px")
+               .attr("text-anchor", "middle")
+               .attr("alignment-baseline", "central")
+               .attr("fill", "gray");
+            
             //Bottom center circle    
             svg.append("circle")
                 .attr("id", "center")
                 .attr("cx", 400)
-                .attr("cy", 400)
+                .attr("cy", 1400)
                 .attr("r", largePriceScale(300))
                 .style("fill", "gray")
                 .style("opacity", 0.65); 
             
-            var large_prices = [500,700,900,1100]
+            var large_prices = [300,500,700,900,1100]
             
             large_prices.forEach(function(d){
                 svg.append("circle")
                     .attr("cx", 400)
-                    .attr("cy", 400)
+                    .attr("cy", 1400)
                     .attr("r", largePriceScale(d) )
                     .style("fill", "none")
                     .attr("stroke-width", 0.5)
@@ -238,7 +261,7 @@
                 svg.append("text")
 			         .text("$"+d)
 			         .attr("x", 400)
-			         .attr("y", 410-largePriceScale(d))
+			         .attr("y", 1380-largePriceScale(d))
                      .attr("font-family", "Futura")
                      .attr("font-size", "20px")
                      .attr("text-anchor", "middle")
@@ -253,18 +276,18 @@
             
             //Lines to show scale
             svg.append("line")
-			.attr("x1", 400+smallPriceScale(300)-4)
-			.attr("y1", 1150)
-			.attr("x2", 400+largePriceScale(300))
-			.attr("y2", 400)
+			.attr("x1", 400+largePriceScale(300))
+			.attr("y1", 1400)
+			.attr("x2", 400+smallPriceScale(300))
+			.attr("y2", 450)
             .style("stroke", "gray")
             .style("stroke-dasharray", "5,5");
             
             svg.append("line")
-			.attr("x1", 400-smallPriceScale(300)+4)
-			.attr("y1", 1150)
-			.attr("x2", 400-largePriceScale(300))
-			.attr("y2", 400)
+			.attr("x1", 400-largePriceScale(300))
+			.attr("y1", 1400)
+			.attr("x2", 400-smallPriceScale(300))
+			.attr("y2", 450)
             .style("stroke", "gray")
             .style("stroke-dasharray", "5,5");
             
@@ -275,7 +298,7 @@
             svg.append("g")
                 .attr("class", "legendAirline")
                 .attr("transform", "translate(50,10)")
-                .style("font-size", "10px");
+                .style("font-size", "15px");
             
             var legendAirline = d3.legendColor()
                 .shape('circle')
@@ -340,19 +363,19 @@
 			     //console.log(bearing + d.City);
 			     //console.log(d.Hour);
 
-			     var r_top = largePriceScale(d.Price);
-                 var r_bot = smallPriceScale(d.Price);
+			     var r_top = smallPriceScale(d.Price);
+                 var r_bot = largePriceScale(d.Price);
 
 			     var cx_top = 400 + r_top * Math.sin(bearing);
 			     var cy_top = 400 + r_top * Math.cos(bearing)*(-1);
                   
 			     var cx_bot = 400 + r_bot * Math.sin(bearing);
-			     var cy_bot = 1200 + r_bot * Math.cos(bearing)*(-1);
+			     var cy_bot = 1400 + r_bot * Math.cos(bearing)*(-1);
 
                  // Top Plot
 
                   
-                 if (d.Price > 300) { 
+                 if (d.Price <= 300) { 
                      svg.append("circle")
 			         .attr("cx", cx_top)
 			         .attr("cy", cy_top)
@@ -368,10 +391,17 @@
                      //.attr("text-anchor", "middle")
                      //.attr("alignment-baseline", "central")
                      .attr("fill", "gray");
+                     
+                     svg.append("circle")
+			         .attr("cx", cx_bot)
+			         .attr("cy", cy_bot)
+			         .attr("r", 3)
+			         .attr("fill", airlineScale(d.Airlines) )
+                     .style("opacity", 0.55); 
                  }
                      
                  // Bottom Plot
-                 if (d.Price <= 300){
+                 if (d.Price > 300){
                      svg.append("circle")
 			         .attr("cx", cx_bot)
 			         .attr("cy", cy_bot)
@@ -387,14 +417,6 @@
                      //.attr("text-anchor", "middle")
                      //.attr("alignment-baseline", "central")
                      .attr("fill", "gray");
-                     
-                     
-                     svg.append("circle")
-			         .attr("cx", cx_top)
-			         .attr("cy", cy_top)
-			         .attr("r", 3)
-			         .attr("fill", airlineScale(d.Airlines) )
-                     .style("opacity", 0.4);
                  }
 
 
