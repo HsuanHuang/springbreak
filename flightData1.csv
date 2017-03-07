@@ -1,0 +1,75 @@
+,Airport,City,Country,Lat,Long,Airlines,Stops,Hour,Price
+8,BOS,Boston,United States,42.26429977,-71.00520325,JetBlue,0,1,117
+9,BUF,Buffalo,United States,42.44049835,-78.73220062,Delta,0,2,150
+72,TPA,Tampa,United States,27.97550011,-82.53320313,JetBlue,0,3,160
+47,YUL,Montreal,Canada,45.47066001,-73.74079895,American,0,2,172
+6,DTW,Detroit,United States,42.25239853,-83.35340118,Delta,0,2,173
+28,MIA,Miami,United States,24.79319954,-80.29060364,American,0,4,178
+3,ROC,Rochester,United States,43.2189003,-77.67240143,Delta,0,1,181
+25,CHS,Charleston,United States,32.89860153,-80.04049683,Delta,0,2,183
+26,JAX,Jacksonville,United States,29.49410057,-81.68789673,Delta,0,3,197
+21,CLT,Charlotte,United States,35.2140007,-80.94309998,Delta,1,6,206
+24,ATL,Atlanta,United States,34.23669968,-84.42810059,Delta,0,2,202
+5,PIT,Pittsburgh,United States,40.49150085,-80.23290253,Delta,0,2,217
+72,SAV,Savannah,United States,31.52760162,-81.20210266,JetBlue,0,3,219
+12,DCA,Washington,United States,38.8521,-77.037697,Delta,0,2,227
+27,MCO,Orlando,United States,28.42939949,-81.30899811,Delta,0,3,237
+20,BNA,Nashville,United States,36.12450027,-86.67819977,American,0,3,243
+34,HOU,Houston,United States,29.64539909,-95.27890015,JetBlue,1,30,268
+11,PHL,Philadelphia,United States,39.97189865,-75.2410965,Delta,0,1,269
+32,DFW,Dallas-Fort Worth,United States,32.89680099,-97.03800201,American,1,11,272
+15,ORD,Chicago,United States,41.97859955,-87.90480042,Delta,0,3,286
+37,ABQ,Albuquerque,United States,35.04019928,-106.6090012,JetBlue,0,5,289
+1,MSY,New Orleans,United States,29.99340057,-90.25800324,JetBlue,1,13,295
+70,CUN,Cancun,Mexico,21.03650093,-86.87709808,Delta,0,4,297
+18,IND,Indianapolis,United States,39.7173,-86.294403,Delta,1,5,298
+53,RNO,Reno,United States,40.49909973,-119.7679977,JetBlue,0,7,301
+7,SJU,San Juan,United States,18.4393997,-66.0018005,JetBlue,0,4,308
+52,SLC,Salt Lake City,United States,41.78839874,-111.9779968,Delta,0,5,316
+17,CVG,Cincinnati,United States,39.04880142,-84.6678009,Delta,1,7,332
+30,ICT,Wichita,United States,37.64989853,-97.43309784,Delta,1,5,332
+13,MSP,Minneapolis,United States,44.88199997,-93.22180176,Delta,0,3,338
+71,SAT,San Antonio,United States,29.53370094,-98.46980286,Delta,0,5,346
+56,TUS,Tucson,United States,32.11610031,-110.9410019,American,0,6,355
+19,STL,St. Louis,United States,38.74869919,-90.37000275,Delta,1,5,362
+54,LAS,Las Vegas,United States,36.08010101,-115.1520004,JetBlue,0,6,363
+40,DEN,Denver,United States,39.96169815,-104.6729965,Delta,0,5,369
+10,CAK,Akron,United States,40.91609955,-81.44219971,Delta,1,4,371
+55,PHX,Phoenix,United States,33.43429947,-112.012001,Delta,0,6,383
+66,EYW,Key West,United States,24.55610085,-81.75959778,American,1,7,386
+31,TUL,Tulsa,United States,36.19839859,-95.88809967,American,1,6,393
+29,OMA,Omaha,United States,41.30319977,-95.89409637,Delta,1,6,396
+4,CLE,Cleveland,United States,41.5117012,-81.84980011,Delta,0,2,398
+63,SFO,San Francisco,United States,37.11899948,-122.375,JetBlue,0,7,422
+22,JAN,Jackson,United States,32.81119919,-90.07589722,American,1,7,434
+2,ALB,Albany,United States,42.74829865,-73.80169678,American,1,6,451
+67,PUJ,Punta Cana,Dominican Republic,18.56739998,-68.36340332,American,1,23,461
+46,BIL,Billings,United States,45.80770111,-108.5429993,Delta,1,7,464
+23,MOB,Mobile,United States,30.69120026,-88.24279785,Delta,1,6,465
+36,LBB,Lubbock,United States,33.66360092,-101.822998,American,1,6,484
+33,GRK,Killeen,United States,31.06719971,-97.8289032,Delta,1,6,486
+64,LAX,Los Angeles,United States,33.94250107,-118.4079971,JetBlue,0,6,486
+58,SEA,Seattle,United States,48.44900131,-122.3089981,Alaska,0,6,491
+14,MKE,Milwaukee,United States,42.94720078,-87.89659882,American,2,9,503
+43,MOT,Minot,United States,48.25939941,-102.2799988,Delta,1,7,518
+16,PIA,Peoria,United States,40.16419983,-89.69329834,American,1,5,525
+0,SMF,Sacramento,United States,38.69540024,-121.5910034,American,1,9,545
+35,CRP,Corpus Christi,United States,27.77039909,-97.50119781,American,2,10,555
+59,PDX,Portland,United States,45.58869934,-122.5979996,Delta,1,28,572
+39,MTJ,Montrose CO,United States,38.50979996,-107.8939972,American,2,24,576
+57,GEG,Spokane,United States,47.61989975,-117.5339966,Alaska,1,28,578
+38,DRO,Durango,United States,37.1515007,-107.7539978,American,1,21,580
+48,BOI,Boise,United States,43.56439972,-116.2229996,Delta,2,14,595
+50,YHM,Toronto,Canada,43.87359924,-79.93499756,Delta,1,26,616
+69,PVR,Puerto Vallarta,Mexico,20.68009949,-105.2539978,American,2,10,619
+51,COD,Cody,United States,44.82019882,-109.0240021,Delta,1,7,635
+42,RAP,Rapid City,United States,44.04529953,-103.0569992,American,1,24,644
+49,JAC,Jacksn Hole,United States,43.6072998,-110.737999,Delta,1,7,692
+44,HVR,Havre,United States,48.54299927,-109.762001,Delta,2,14,697
+45,GDV,Glendive,United States,47.13869858,-104.8069992,Delta,2,14,697
+61,MFR,Medford,United States,42.37419891,-122.8730011,Alaska,1,29,733
+60,EUG,Eugene,United States,44.12459946,-123.211998,Alaska,1,29,787
+62,ACV,Arcata CA,United States,40.97809982,-124.1090012,Alaska,2,20,944
+65,HNL,Honolulu,United States,21.31870079,-157.9219971,American,1,17,1008
+41,BFF,Scottsbluff,United States,41.87400055,-103.5960007,Alaska,2,30,1071
+68,RSD,Rock Sound,Bahamas,24.89507873,-76.17688179,COPA,2,40,1095
