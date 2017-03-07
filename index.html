@@ -29,7 +29,7 @@
             <h2>Check by number of Stops</h2>
             <svg id = "stops" height="800" width="800">
             </svg>
-            <h2>Check by Price per Mile</h2>
+            <h2>Miles Per Dollar</h2>
             <svg id = "kpd" height="1000" width="800">
             </svg>
         </center>
@@ -142,7 +142,7 @@
             
             // KPD Scale
             var kpdScale = d3.scaleLinear()
-                .domain([0,16])
+                .domain([0,8])
                 .range([100,700]);
             
             // Region Scale
@@ -349,10 +349,7 @@
             
             var flightData;
             var KPD_sorted;
-            
-            var counter_0 = 0;
-            var counter_1 = 0;
-            var counter_2 = 0;
+            var REG_sorted;
             
             var kpd = d3.select("#kpd");
             
@@ -401,7 +398,7 @@
                      d.Reg = "W";
                  };
                   
-                 if (1.71*Math.PI<=reg_bearing && reg_bearing < 0.37*Math.PI){
+                 if (1.71*Math.PI<=reg_bearing || reg_bearing < 0.37*Math.PI){
                      d.Reg = "N";
                  };  
                   
@@ -415,7 +412,7 @@
                  
                  var c = 2*Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
                   
-                 var dist = R*c;
+                 var dist = 0.621371*R*c;
                   
                  d.KPD = dist/d.Price;
                 
@@ -472,14 +469,36 @@
                      //.attr("text-anchor", "middle")
                      //.attr("alignment-baseline", "central")
                      .attr("fill", "gray");
-                 }
-
+                 }                  
+		      });
+              
+                
+                
+                
+              // Create List of Cities sorted by Region   
+              REG_sorted = flightData.sort(function(x,y) { 
+                     return d3.ascending(x.Reg,y.Reg);});               
+                
+            
+              var counter_0 = 0;
+              var counter_1 = 0;
+              var counter_2 = 0;    
+              
+                
+              REG_sorted.forEach(function(d){
                 // Write Names under Stops
                 if(d.Stops == 0){
+                    stops.append("rect")
+                    .attr("x",dotScale(0)-57)
+                    .attr("y", 152+counter_0*17)
+                    .attr("width",114)
+                    .attr("height",18)
+                    .style("fill", regionScale(d.Reg));    
+                
                     stops.append("text")
 			         .text(d.City)
 			         .attr("x", dotScale(0))
-			         .attr("y", 150+counter_0*15)
+			         .attr("y", 160+counter_0*17)
                      .attr("font-size", "15px")
                      .attr("text-anchor", "middle")
                      .attr("alignment-baseline", "central");
@@ -488,10 +507,17 @@
                 }
                   
                 if(d.Stops == 1){
+                    stops.append("rect")
+                    .attr("x",dotScale(1)-57)
+                    .attr("y", 152+counter_1*17)
+                    .attr("width",114)
+                    .attr("height",18)
+                    .style("fill", regionScale(d.Reg)); 
+                    
                     stops.append("text")
 			         .text(d.City)
 			         .attr("x", dotScale(1))
-			         .attr("y", 150+counter_1*15)
+			         .attr("y", 160+counter_1*17)
                      .attr("font-size", "15px")
                      .attr("text-anchor", "middle")
                      .attr("alignment-baseline", "central");
@@ -500,18 +526,24 @@
                 }
                   
                 if(d.Stops == 2){
+                    stops.append("rect")
+                    .attr("x",dotScale(2)-57)
+                    .attr("y", 152+counter_2*17)
+                    .attr("width",114)
+                    .attr("height",18)
+                    .style("fill", regionScale(d.Reg)); 
+                    
                     stops.append("text")
 			         .text(d.City)
 			         .attr("x", dotScale(2))
-			         .attr("y", 150+counter_2*15)
+			         .attr("y", 160+counter_2*17)
                      .attr("font-size", "15px")
                      .attr("text-anchor", "middle")
                      .attr("alignment-baseline", "central");
                            
                     counter_2 = counter_2 + 1;
                 }
-                  
-		      });
+              });
                 
               // Create List of Cities sorted by KPD    
               KPD_sorted = flightData.sort(function(x,y) { 
@@ -522,16 +554,16 @@
               KPD_sorted.forEach(function(d) {
                   kpd.append("line")
 			         .attr("x1", 100)
-			         .attr("y1", 10*kpd_index+10)
+			         .attr("y1", 10*kpd_index+30)
 			         .attr("x2", kpdScale(d.KPD))
-			         .attr("y2", 10*kpd_index+10)
+			         .attr("y2", 10*kpd_index+30)
                      .style("stroke", regionScale(d.Reg))
                      .style("stroke-width", "5");
                   
                   kpd.append("text")
 			         .text(d.City)
 			         .attr("x", 10)
-			         .attr("y", 10*kpd_index+10)
+			         .attr("y", 10*kpd_index+30)
                      .attr("font-size", "10px")
                      //.attr("text-anchor", "middle")
                      .attr("alignment-baseline", "central");
@@ -540,8 +572,44 @@
             
                   
    
-              });   
+              });
+                
+              // GUIDES
+              kpd.append("line")
+			  .attr("x1", kpdScale(0))
+			  .attr("y1", 25)
+			  .attr("x2", kpdScale(0))
+			  .attr("y2", 765)
+              .style("stroke", "gray");
+                
+              var kpd_guides = [2,4,6,8];    
               
+              kpd_guides.forEach(function(d){
+                    kpd.append("line")
+			         .attr("x1", kpdScale(d))
+			         .attr("y1", 25)
+			         .attr("x2", kpdScale(d))
+			         .attr("y2", 765)
+                     .style("stroke", "gray")
+                     .style("stroke-dasharray", "5,5");
+                  
+                    kpd.append("text")
+			         .text(d+" Miles")
+			         .attr("x", kpdScale(d))
+			         .attr("y", 20)
+                     .attr("font-size", "10px")
+                     .attr("text-anchor", "middle")
+                     .attr("alignment-baseline", "central");
+                  
+                    kpd.append("text")
+			         .text(d+" Miles")
+			         .attr("x", kpdScale(d))
+			         .attr("y", 770)
+                     .attr("font-size", "10px")
+                     .attr("text-anchor", "middle")
+                     .attr("alignment-baseline", "central");  
+              })   
+
                 
                 
                 
